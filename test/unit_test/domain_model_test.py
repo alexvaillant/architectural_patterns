@@ -26,3 +26,18 @@ def test_4_cannot_allocate_if_available_smaller_than_required():
 def test_5_cannot_allocate_if_sku_different():
     batch, order_line = dm_helper.create_different_sku_batch_line('LARGE-TABLE', 'RED-CHAIR', 20, 2)
     assert not batch.can_allocate(order_line)
+
+
+def test_6_can_only_deallocate_allocated_lines():
+    batch, order_line = dm_helper.create_same_sku_batch_line('LARGE-TABLE', 20, 2)
+    batch.deallocate(order_line)
+    
+    assert batch.available_quantity == 20
+
+
+def test_7_allocate_is_idempotent():
+    batch, order_line = dm_helper.create_same_sku_batch_line('LARGE-TABLE', 20, 2)
+    batch.allocate(order_line)
+    batch.allocate(order_line)
+
+    assert batch.available_quantity == 18

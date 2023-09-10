@@ -1,0 +1,1 @@
+export PYTHONPATH="${PYTHONPATH}:/Desktop/privates\ lernen/Informatik/Software\ Architektur/Architekturpatterns\ mit\ Pyhton\ \(O\'Reilly\)/architectural_patterns/"
